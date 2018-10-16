@@ -1,45 +1,50 @@
 tour = 0
+#on définit les cases du plateau
+class BoardCase< Board
 
-class BoardCase
-
-	attr_accessor :case_value, :case_number
+	attr_accessor :empty_case, :num
 
 
 	def initialize
-		@case_value = case_value
-		@case_number = case_number
+		@empty_case = true
+		@num = num
+		@all_cases << self
 	end	
 
-	def to_s
-		case_value = case_value.to_s
+	def display
+		if self.empty_case
+			return @num
+		elsif self.is_x
+			return "x"
+		elsif self.is_O
+			return "O"
+		end
 	end
 
 end
 
-=begin
 	def change_to_x
-	 player_entrance = "x"
+	@empty_case =false
+	@is_x = true
 	end
 
 	def change_to_O
-	player_entrance = "O"
+	@empty_case =false
+	@is_O = true
 	end
 
-	def affichage
-		if self
-
-	end
+	
 
 	
 end
 =end
-
+#on définit l'état du plateau
 class Board
 
 	attr_accessor :cases
 
 		def initialize 
-			@toutes_les_cases = [case1,case2,case3,case4,case5,case6,case7,case8,case9,]
+			@all_cases = [case1,case2,case3,case4,case5,case6,case7,case8,case9,]
 		end
 
 		def to_s
@@ -55,18 +60,20 @@ class Board
 			 #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
 		end
 
-		def victory?
+		def game_status
 
-			if @toutes_les_cases[0].est_x && @toutes_les_cases[1].est_x && @toutes_les_cases[2].est_x || @toutes_les_cases[3].est_x && @toutes_les_cases[4].est_x && @toutes_les_cases[5].est_x || @toutes_les_cases[6].est_x && @toutes_les_cases[7].est_x && @toutes_les_cases[8].est_x || @toutes_les_cases[0].est_x && @toutes_les_cases[3].est_x && @toutes_les_cases[9].est_x || @toutes_les_cases[2].est_x && @toutes_les_cases[4].est_x && @toutes_les_cases[6].est_x || @toutes_les_cases[0].est_x && @toutes_les_cases[3].est_x && @toutes_les_cases[6].est_x @toutes_les_cases[1].est_x && @toutes_les_cases[4].est_x && @toutes_les_cases[7].est_x @toutes_les_cases[2].est_x && @toutes_les_cases[5].est_x && @toutes_les_cases[8].est_x
+			if @all_cases[0].is_x && @all_cases[1].is_x && @all_cases[2].is_x || @all_cases[3].is_x && @all_cases[4].is_x && @all_cases[5].is_x || @all_cases[6].is_x && @all_cases[7].is_x && @all_cases[8].is_x || @all_cases[0].is_x && @all_cases[3].is_x && @all_cases[9].is_x || @all_cases[2].is_x && @all_cases[4].est_x && @all_cases[6].is_x || @all_cases[0].is_x && @all_cases[3].is_x && @all_cases[6].is_x @all_cases[1].is_x && @all_cases[4].is_x && @all_cases[7].is_x @all_cases[2].is_x && @all_cases[5].is_x && @all_cases[8].is_x
 				@victory == true 
 				puts "Le joueur 1 à gagné"
-			elsif @toutes_les_cases[0].est_O && @toutes_les_cases[1].est_O && @toutes_les_cases[2].est_O || @toutes_les_cases[3].est_O && @toutes_les_cases[4].est_O && @toutes_les_cases[5].est_O || @toutes_les_cases[6].est_O && @toutes_les_cases[7].est_O && @toutes_les_cases[8].est_O || @toutes_les_cases[0].est_O && @toutes_les_cases[3].est_O && @toutes_les_cases[9].est_O || @toutes_les_cases[2].est_O && @toutes_les_cases[4].est_O && @toutes_les_cases[6].est_O || @toutes_les_cases[0].est_O && @toutes_les_cases[3].est_O && @toutes_les_cases[6].est_O @toutes_les_cases[1].est_O && @toutes_les_cases[4].est_O && @toutes_les_cases[7].est_O @toutes_les_cases[2].est_O && @toutes_les_cases[5].est_O && @toutes_les_cases[8].est_O
-				@victory == true 
-				puts "Le joueur 2 à gagné"
-			elsif tour > 9
-				@victory == false
-				@draw == true
+			elsif @all_cases[0].is_O && @all_cases[1].is_O && @all_cases[2].is_O || @all_cases[3].is_O && @all_cases[4].is_O && @all_cases[5].is_O || @all_cases[6].is_O && @all_cases[7].is_O && @all_cases[8].is_O || @all_cases[0].is_O && @all_cases[3].is_O && @all_cases[9].is_O || @all_cases[2].is_O && @all_cases[4].is_O && @all_cases[6].is_O || @all_cases[0].is_O && @all_cases[3].is_O && @all_cases[6].is_O || all_cases[1].is_O && @all_cases[4].is_O && @all_cases[7].is_O || @all_cases[2].is_O && @all_cases[5].is_O && @all_cases[8].is_O
+				@victory == true				
+				puts "Le joueur 2 à gagné"			
+			elsif tour > 9 && @victory == false
+				self.@draw
 			end
+		end
+		def victory
+			@playing =
 end
 
 class Player
